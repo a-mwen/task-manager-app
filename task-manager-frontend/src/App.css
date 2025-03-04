@@ -1,0 +1,319 @@
+/* General Styles */
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap");
+
+/* Gradient Animation */
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.gradient {
+    --size: 750px;
+    --speed: 50s;
+    --easing: cubic-bezier(0.8, 0.2, 0.2, 0.8);
+
+    width: var(--size);
+    height: var(--size);
+    filter: blur(calc(var(--size) / 5));
+    background-image: linear-gradient(hsl(222, 84%, 60%), hsl(164, 79%, 71%));
+    animation: rotate var(--speed) var(--easing) alternate infinite;
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+@media (min-width: 720px) {
+    .gradient {
+        --size: 500px;
+    }
+}
+
+body {
+    background-color: #071c39;
+    margin: 0;
+    font-family: 'Rubik', sans-serif;
+    color: #eee;
+    user-select: none;
+    overflow-y: auto; /* Enable scrolling */
+}
+
+/* App Container */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    background: rgba(7, 28, 57, 0.8); /* Semi-transparent overlay */
+}
+
+/* Navbar */
+.navbar {
+    background: rgba(7, 28, 57, 0.9); /* Semi-transparent background */
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: -1px;
+}
+
+/* Hero Section */
+.hero {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.content {
+    background: rgba(7, 28, 57, 0.8); /* Semi-transparent background */
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.content h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -1px;
+}
+
+.content p {
+    font-size: 1.5rem;
+    margin: 0.5rem 0 0;
+    color: #a89ec9;
+}
+
+.today {
+    font-size: 1.2rem;
+    color: #fff;
+    margin-top: 1rem;
+}
+
+.cta-button {
+    background: linear-gradient(145deg, #ee83e5, #a89ec9);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
+    transition: 0.3s all;
+}
+
+.cta-button:hover {
+    background: linear-gradient(145deg, #a89ec9, #ee83e5);
+    transform: scale(1.05);
+}
+
+/* Task Manager */
+.task-manager {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: rgba(7, 28, 57, 0.8); /* Semi-transparent background */
+    border-radius: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* ... (rest of the CSS remains the same) ... */
+
+.task-form {
+    background: #1a1a1a;
+    padding: 1.5rem;
+    border-radius: 0.7rem;
+    box-shadow: 0 7px 20px 5px #00000088;
+    border: 1px solid #ffffff22;
+    flex: 1;
+    min-width: 300px;
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+    transition: 0.5s all;
+}
+
+.task-form:hover {
+    border: 1px solid #ffffff44;
+    box-shadow: 0 7px 50px 10px #000000aa;
+    transform: scale(1.015);
+}
+
+.task-form h3 {
+    margin-top: 0;
+    color: #ee83e5;
+    font-weight: 600;
+}
+
+.task-form input,
+.task-form textarea,
+.task-form select {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ffffff22;
+    border-radius: 0.5rem;
+    background-color: #1a1a1a;
+    color: #eee;
+    font-family: 'Rubik', sans-serif;
+}
+
+.task-form input::placeholder,
+.task-form textarea::placeholder {
+    color: #a89ec9;
+}
+
+.task-form button {
+    background: linear-gradient(145deg, #ee83e5, #a89ec9);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    margin-right: 0.5rem;
+    transition: 0.3s all;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
+}
+
+.task-form button:hover {
+    background: linear-gradient(145deg, #a89ec9, #ee83e5);
+    transform: scale(1.05);
+}
+
+/* Task List */
+.task-list {
+    flex: 2;
+    min-width: 300px;
+}
+
+.task-item {
+    background: #1a1a1a;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.7rem;
+    box-shadow: 0 7px 20px 5px #00000088;
+    border: 1px solid #ffffff22;
+    transition: 0.5s all;
+}
+
+.task-item:hover {
+    border: 1px solid #ffffff44;
+    box-shadow: 0 7px 50px 10px #000000aa;
+    transform: scale(1.015);
+}
+
+.task-item h4 {
+    margin: 0 0 0.5rem;
+    color: #ee83e5;
+    font-weight: 600;
+}
+
+.task-item p {
+    margin: 0.25rem 0;
+    color: #a89ec9;
+}
+
+.priority-low {
+    color: #60a5fa;
+}
+
+.priority-medium {
+    color: #e879f9;
+}
+
+.priority-high {
+    color: #ff4081;
+}
+
+.task-buttons button {
+    background: linear-gradient(145deg, #ee83e5, #a89ec9);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    margin-right: 0.5rem;
+    transition: 0.3s all;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
+}
+
+.task-buttons button:hover {
+    background: linear-gradient(145deg, #a89ec9, #ee83e5);
+    transform: scale(1.05);
+}
+
+/* Footer */
+.footer {
+    background: #020631;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    margin-top: auto;
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.footer h4 {
+    margin: 0 0 0.5rem;
+    font-weight: 600;
+}
+
+.social-icons a {
+    color: white;
+    margin: 0 0.5rem;
+    text-decoration: none;
+    transition: 0.3s all;
+}
+
+.social-icons a:hover {
+    color: #ee83e5;
+    text-decoration: underline;
+}
+
+.footer p {
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+    color: #a89ec9;
+}
+
+.back-to-top {
+    background: linear-gradient(145deg, #ee83e5, #a89ec9);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
+    transition: 0.3s all;
+}
+
+.back-to-top:hover {
+    background: linear-gradient(145deg, #a89ec9, #ee83e5);
+    transform: scale(1.05);
+}
