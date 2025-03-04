@@ -32,3 +32,9 @@ A full-stack task management application built with **React**, **Node.js**, **Ex
    ```bash
    git clone https://github.com/a-mwen/task-manager.git
    cd task-manager
+
+
+License
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+Made with ❤️ by Asha Mweene
