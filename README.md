@@ -2,7 +2,6 @@
 
 A full-stack task management application built with **React**, **Node.js**, **Express**, and **PostgreSQL**. Organize your tasks efficiently with features like adding, editing, deleting, and drag-and-drop reordering.
 
-![Task Manager Screenshot](screenshot.png) <!-- Add a screenshot of your app here -->
 
 ## Features
 
