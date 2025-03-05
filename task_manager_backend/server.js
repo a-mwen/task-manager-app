@@ -1,21 +1,22 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const { Pool } = require('pg');
+const pool = require('./database'); // Import the pool from the database.js file
 const app = express();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 
-// Database Connection
-const pool = new Pool({
-    user: process.env.DB_USER,
-    host: process.env.DB_HOST,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT,
-});
+// Test DB connection
+pool.connect()
+    .then(() => console.log('Connected to the database successfully'))
+    .catch(err => console.error('Error connecting to the database:', err));
+
+// Check if the tasks table exists
+pool.query('SELECT * FROM tasks LIMIT 1')
+    .then(() => console.log('Tasks table exists'))
+    .catch(err => console.error('Error checking tasks table:', err));
 
 // Routes
 
@@ -32,7 +33,7 @@ app.get('/tasks', async (req, res) => {
         }));
         res.json(tasks);
     } catch (err) {
-        console.error('Error fetching tasks:', err);
+        console.error('Error fetching tasks:', err.message);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
@@ -50,7 +51,7 @@ app.post('/tasks', async (req, res) => {
         );
         res.json(result.rows[0]);
     } catch (err) {
-        console.error('Error creating task:', err);
+        console.error('Error creating task:', err.message);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
@@ -76,7 +77,7 @@ app.put('/tasks/:id', async (req, res) => {
         );
         res.json(result.rows[0]);
     } catch (err) {
-        console.error('Error updating task:', err);
+        console.error('Error updating task:', err.message);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
@@ -98,7 +99,7 @@ app.delete('/tasks/:id', async (req, res) => {
         await pool.query('DELETE FROM tasks WHERE id = $1', [taskId]);
         res.json({ message: 'Task deleted' });
     } catch (err) {
-        console.error('Error deleting task:', err);
+        console.error('Error deleting task:', err.message);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
