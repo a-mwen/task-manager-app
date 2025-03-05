@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css';
 
+const API_URL = 'https://task-manager-app-w0cs.onrender.com'; // Replace with your Render backend URL
+
 const App = () => {
     const [tasks, setTasks] = useState([]);
     const [task, setTask] = useState({ title: '', description: '', status: 'To Do', priority: 'Low' });
@@ -14,7 +16,7 @@ const App = () => {
 
     const fetchTasks = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/tasks');
+            const response = await axios.get(`${API_URL}/tasks`);
             setTasks(response.data);
         } catch (err) {
             console.error('Error fetching tasks:', err);
@@ -29,10 +31,10 @@ const App = () => {
 
         try {
             if (editingTask) {
-                await axios.put(`http://localhost:5000/tasks/${editingTask.id}`, task);
+                await axios.put(`${API_URL}/tasks/${editingTask.id}`, task);
                 setEditingTask(null);
             } else {
-                await axios.post('http://localhost:5000/tasks', task);
+                await axios.post(`${API_URL}/tasks`, task);
             }
             setTask({ title: '', description: '', status: 'To Do', priority: 'Low' });
             fetchTasks();
@@ -43,7 +45,7 @@ const App = () => {
 
     const deleteTask = async (id) => {
         try {
-            await axios.delete(`http://localhost:5000/tasks/${id}`);
+            await axios.delete(`${API_URL}/tasks/${id}`);
             fetchTasks();
         } catch (err) {
             console.error('Error deleting task:', err);
@@ -106,22 +108,21 @@ const App = () => {
                 </div>
 
                 <div className="task-list">
-                {tasks.map((task) => {
-    console.log(task);  // Debugging log
-    return (
-        <div key={task.id} className="task-item">
-            <h4>{task.title}</h4>
-            <p>{task.description}</p>
-            <p>Status: {task.status}</p>
-            <p>Priority: <span className={`priority-${(task.priority || 'low').toLowerCase()}`}>{task.priority}</span></p>
-            <div className="task-buttons">
-                <button onClick={() => setEditingTask(task)}>Edit</button>
-                <button onClick={() => deleteTask(task.id)}>Delete</button>
-            </div>
-        </div>
-    );
-})}
-
+                    {tasks.map((task) => {
+                        console.log(task);  // Debugging log
+                        return (
+                            <div key={task.id} className="task-item">
+                                <h4>{task.title}</h4>
+                                <p>{task.description}</p>
+                                <p>Status: {task.status}</p>
+                                <p>Priority: <span className={`priority-${(task.priority || 'low').toLowerCase()}`}>{task.priority}</span></p>
+                                <div className="task-buttons">
+                                    <button onClick={() => setEditingTask(task)}>Edit</button>
+                                    <button onClick={() => deleteTask(task.id)}>Delete</button>
+                                </div>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
 
